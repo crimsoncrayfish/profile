@@ -28,6 +28,7 @@
   const searchInput = document.querySelector("[data-search-input]");
   const searchMirror = document.querySelector("[data-search-mirror]");
   const searchCount = document.querySelector("[data-search-count]");
+  const searchEmpty = document.querySelector("[data-search-empty]");
   const searchItems = searchList
     ? Array.from(searchList.children)
     : [];
@@ -46,6 +47,10 @@
       searchCount.textContent = q
         ? `${visible}/${searchItems.length}`
         : "";
+    }
+
+    if (searchEmpty) {
+      searchEmpty.hidden = !(q && visible === 0);
     }
   };
 

@@ -113,6 +113,14 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
           )}
         </div>
 
+        {backHref && (
+          <div class="prompt-line prompt-line-back">
+            <span class="prompt-user">marco@web</span>
+            <span class="prompt-path">{promptPath}</span>
+            <a href={backHref} class="nav">cd ..</a>
+          </div>
+        )}
+
         <nav class="commands">
           <a href="/" class:list={["nav", { active: active === "home" }]}>./home</a>
           <a href="/blog" class:list={["nav", { active: active === "blog" }]}>./blog</a>
@@ -122,7 +130,7 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
 
         <slot />
 
-        <Footer backHref={backHref} />
+        <Footer />
       </div>
       <div class="kb-hint">
         <kbd>j</kbd>/<kbd>k</kbd> navigate · <kbd>Enter</kbd> select · <kbd>esc</kbd> clear

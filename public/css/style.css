@@ -244,6 +244,10 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
+.prompt-line-back {
+  margin-top: -1rem;
+}
+
 .prompt-user {
   color: var(--accent);
 }
@@ -270,7 +274,8 @@ nav.commands a::before {
   color: var(--overlay0);
 }
 
-nav.commands a:hover {
+nav.commands a:hover,
+nav.commands a:active {
   color: var(--accent);
   background: transparent;
 }
@@ -284,6 +289,8 @@ nav.commands a.active {
 nav.commands a.active::before {
   color: var(--bg);
 }
+
+
 
 .cursor {
   display: inline-block;
@@ -417,6 +424,14 @@ li::marker {
   font-size: 0.8rem;
 }
 
+.search-empty {
+  color: var(--overlay0);
+}
+
+.search-empty::before {
+  content: "> ";
+}
+
 /* --- project / post list items --- */
 .entry-list {
   list-style: none;
@@ -502,6 +517,19 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--overlay0);
+  border-bottom: none;
+}
+
+.source-link:hover {
+  background: transparent;
+  color: var(--accent);
 }
 
 .error-text {
