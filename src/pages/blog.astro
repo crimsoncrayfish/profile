@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout
+  title="marco@web:~/blog$"
+  description="Writing on software engineering, leadership, and whatever else is on my mind."
+  windowLabel="~/blog"
+  promptPath="~/blog$"
+  promptCmd="ls -la"
+  active="blog"
+  searchPlaceholder="filter posts..."
+>
+  <h1>Blog</h1>
+
+  <ul class="entry-list" data-searchable>
+    {
+      posts.map((post) => (
+        <li>
+          <div class="entry-title">
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            <span class="entry-meta">{post.data.date.toISOString().slice(0, 10)}</span>
+          </div>
+          <p class="entry-desc">{post.data.description}</p>
+          {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

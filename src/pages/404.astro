@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="marco@web:~$ 404"
+  description="Page not found."
+  windowLabel="~"
+  promptPath="~$"
+  promptCmd={`cd ${Astro.url.pathname}`}
+  active=""
+>
+  <h1>404</h1>
+  <p>
+    <span class="error-text">bash: cd: {Astro.url.pathname}: No such file or directory</span>
+  </p>
+  <p>Whatever you were looking for isn't here.</p>
+</BaseLayout>

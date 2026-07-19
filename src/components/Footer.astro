@@ -1,0 +1,12 @@
+---
+interface Props {
+  backHref?: string;
+}
+
+const { backHref } = Astro.props;
+---
+
+<footer>
+  <span>A personal site by Marco</span>
+  {backHref && <span><a href={backHref}>cd ..</a></span>}
+</footer>

@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="marco@web:~$"
+  description="Marco Steenkamp: software engineer and team lead. Projects, links, and occasional writing."
+  windowLabel="~"
+  promptPath="~$"
+  promptCmd="whoami"
+  active="home"
+>
+  <h1>Marco</h1>
+  <p>
+    Software engineer and team lead. I build things, break things, and
+    occasionally write about it. Below are some projects and links.
+  </p>
+
+  <h2>projects</h2>
+  <ul class="entry-list">
+    {
+      projects.map((project) => (
+        <li>
+          <div class="entry-title">
+            <a href={project.data.url} target="_blank" rel="noopener">
+              {project.data.title}
+            </a>
+            <span class="entry-meta">{project.data.year}</span>
+          </div>
+          <p class="entry-desc">{project.data.description}</p>
+          {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>links</h2>
+  <ul>
+    <li>
+      <a
+        href="https://github.com/crimsoncrayfish"
+        target="_blank"
+        rel="noopener">github.com/crimsoncrayfish</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/marco-steenkamp-16140621a/"
+        target="_blank"
+        rel="noopener">linkedin.com/in/marco-steenkamp</a
+      >
+    </li>
+    <li>
+      <a href="mailto:m1992steen@gmail.com">m1992steen@gmail.com</a>
+    </li>
+  </ul>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const statusLabel = {
+  done: "done",
+  "in-progress": "in progress",
+  "to-read": "to read",
+} as const;
+
+const statusClass = {
+  done: "status-green",
+  "in-progress": "status-yellow",
+  "to-read": "status-gray",
+} as const;
+
+const books = (await getCollection("reading-list")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="marco@web:~/reading-list$"
+  description="Books I've read, books I'm reading, and books on deck."
+  windowLabel="~/reading-list"
+  promptPath="~/reading-list$"
+  promptCmd="cat books.txt"
+  active="reading-list"
+  searchPlaceholder="filter books..."
+>
+  <h1>Reading List</h1>
+
+  <ul class="entry-list" data-searchable>
+    {
+      books.map((book) => (
+        <li>
+          <div class="entry-title">
+            <span tabindex="0">{book.data.title}</span>
+            <span class={`tag ${statusClass[book.data.status]}`}>
+              {statusLabel[book.data.status]}
+            </span>
+          </div>
+          <p class="entry-desc">{book.data.author}</p>
+          <p class="entry-desc">{book.data.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

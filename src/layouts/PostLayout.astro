@@ -1,0 +1,31 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  date: Date;
+  readTime: string;
+}
+
+const { title, description, slug, date, readTime } = Astro.props;
+const formattedDate = date.toISOString().slice(0, 10);
+---
+
+<BaseLayout
+  title={`marco@web:~/blog$ cat ${slug}.md`}
+  description={description}
+  windowLabel={`~/blog/${slug}`}
+  promptPath="~/blog$"
+  promptCmd={`cat ${slug}.md`}
+  active="blog"
+  backHref="/blog"
+  ogType="article"
+>
+  <article>
+    <h1>{title}</h1>
+    <div class="article-meta">{formattedDate} · {readTime}</div>
+    <slot />
+  </article>
+</BaseLayout>
